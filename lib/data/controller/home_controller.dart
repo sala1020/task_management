@@ -74,13 +74,11 @@ class HomeController extends ChangeNotifier {
     try {
       final tasks = taskBox.getAll();
 
-      // Save to SQLite
       await LocalDBHelper.deleteAllTasks();
       for (final task in tasks) {
         await LocalDBHelper.insertTask(task);
       }
 
-      // Export .db file
       await DatabaseBackupHelper.exportDatabase();
 
       ToastWidget.showToast("${tasks.length} task(s) exported to SQLite ✅");
@@ -91,10 +89,8 @@ class HomeController extends ChangeNotifier {
 
   Future<void> importFromSQLite() async {
     try {
-      // Pick .db file and replace current one
       await DatabaseBackupHelper.importDatabaseFromUserFile();
 
-      // Load tasks from imported SQLite
       final importedTasks = await LocalDBHelper.getAllTasks();
 
       if (importedTasks.isEmpty) {
@@ -102,7 +98,6 @@ class HomeController extends ChangeNotifier {
         return;
       }
 
-      // Replace ObjectBox data
       await taskBox.removeAll();
       for (final task in importedTasks) {
         taskBox.put(task);

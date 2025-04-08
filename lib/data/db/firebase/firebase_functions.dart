@@ -5,7 +5,6 @@ class FirestoreHelper {
   final _firestore = FirebaseFirestore.instance;
   final _collection = 'Completed tasks';
 
-  /// Upload a single task to Firestore
   Future<void> uploadTask(TaskModel task) async {
     try {
       await _firestore
@@ -18,7 +17,6 @@ class FirestoreHelper {
     }
   }
 
-  /// Delete a task from Firestore
   Future<void> deleteTask(int id) async {
     try {
       await _firestore.collection(_collection).doc(id.toString()).delete();
@@ -27,7 +25,6 @@ class FirestoreHelper {
     }
   }
 
-  /// Fetch all tasks from Firestore and convert to TaskModel list
   Future<List<TaskModel>> fetchAllTasks() async {
     try {
       final snapshot = await _firestore.collection(_collection).get();

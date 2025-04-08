@@ -19,7 +19,6 @@ class AllTaskController extends ChangeNotifier {
   AllTaskController() {
     _loadInitialData();
 
-    // Watch for changes in the local task box
     _taskStreamSub = taskBox.query().watch(triggerImmediately: true).listen((
       query,
     ) {
@@ -110,7 +109,6 @@ class AllTaskController extends ChangeNotifier {
     return (completed / tasks.length).clamp(0.2, 1.0);
   }
 
-  /// Determines wave color based on most frequent priority
   Color getWaveColor() {
     final tasks = taskBox.getAll();
     if (tasks.isEmpty) return Colors.blue;

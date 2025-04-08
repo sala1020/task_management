@@ -77,10 +77,10 @@ class UpdateTaskScreen extends StatelessWidget {
               icon: const Icon(Icons.save, color: Colors.white),
               onPressed: () {
                 if (controller.validateForm()) {
-                  controller.updateTaskInBox(); // ✅ Saves to ObjectBox
+                  controller.updateTaskInBox(); 
                   Navigator.pop(
                     context,
-                  ); // ✅ AllTaskController auto updates due to watch()
+                  );
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text("Please fill all fields")),

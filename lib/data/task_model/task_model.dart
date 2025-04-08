@@ -20,7 +20,6 @@ class TaskModel {
     required this.endDate,
   });
 
-  // 🔁 Convert TaskModel to JSON
   Map<String, dynamic> toJson() {
     return {
       'id': id,
@@ -32,7 +31,6 @@ class TaskModel {
     };
   }
 
-  // 🔁 Create TaskModel from JSON
   factory TaskModel.fromJson(Map<String, dynamic> json) {
     return TaskModel(
       id: json['id'] ?? 0,
@@ -44,7 +42,6 @@ class TaskModel {
     );
   }
 
-  //for local db
   Map<String, dynamic> toMap() {
     return {
       'id': id,
@@ -74,8 +71,8 @@ List<TaskModel> sampleTasks = [
     title: "Finish Assignment",
     description: "Complete the Flutter app assignment by tonight",
     priority: "High",
-    status: "Pending", // Not completed
-    endDate: DateTime.now().subtract(Duration(hours: 2)), // Past time = overdue
+    status: "Pending",
+    endDate: DateTime.now().subtract(Duration(hours: 2)), 
   ),
   TaskModel(
     id: 2,

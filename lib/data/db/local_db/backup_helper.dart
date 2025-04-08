@@ -7,9 +7,7 @@ import 'package:permission_handler/permission_handler.dart';
 class DatabaseBackupHelper {
   static const String dbName = 'tasks.db';
 
-  /// EXPORT to Downloads folder
   static Future<void> exportDatabase() async {
-    // Request permission (Android 11+ requires manageExternalStorage)
     final storageStatus = await Permission.manageExternalStorage.request();
     if (!storageStatus.isGranted) {
       throw Exception("Storage permission denied");
@@ -34,7 +32,6 @@ class DatabaseBackupHelper {
     }
   }
 
-  /// IMPORT from selected .db file
   static Future<void> importDatabaseFromUserFile() async {
     final result = await FilePicker.platform.pickFiles(
       type: FileType.any,
@@ -45,7 +42,6 @@ class DatabaseBackupHelper {
       final appDir = await getApplicationDocumentsDirectory();
       final targetPath = p.join(appDir.path, dbName);
 
-      // Replace existing database file
       await pickedFile.copy(targetPath);
       print("✅ Imported DB from: ${pickedFile.path}");
     } else {
