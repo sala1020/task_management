@@ -68,11 +68,8 @@ class AllTaskController extends ChangeNotifier {
 
   void deleteTask(int id, bool isOnline) {
     taskBox.remove(id);
-    if (isOnline) {
-      firestore.deleteTask(id);
-    } else {
-      debugPrint("Offline delete detected — skipping Firestore delete");
-    }
+    firestore.deleteTask(id);
+
     ToastWidget.showToast("Task deleted successfully");
   }
 
@@ -100,46 +97,6 @@ class AllTaskController extends ChangeNotifier {
 
   List<TaskModel> getPendingTasks() {
     return _tasks.where((task) => task.status != "Completed").toList();
-  }
-
-  double getWaveHeight() {
-    final tasks = taskBox.getAll();
-    if (tasks.isEmpty) return 0.2;
-    final completed = tasks.where((t) => t.status == "Completed").length;
-    return (completed / tasks.length).clamp(0.2, 1.0);
-  }
-
-  Color getWaveColor() {
-    final tasks = taskBox.getAll();
-    if (tasks.isEmpty) return Colors.blue;
-
-    final high = tasks.where((t) => t.priority == "High").length;
-    final medium = tasks.where((t) => t.priority == "Medium").length;
-    final low = tasks.where((t) => t.priority == "Low").length;
-
-    if (high >= medium && high >= low) {
-      return Colors.red;
-    } else if (medium >= high && medium >= low) {
-      return Colors.blue;
-    } else {
-      return Colors.green;
-    }
-  }
-
-  Widget buildWaveWidget() {
-    return SizedBox(
-      height: 160,
-      child: WaveWidget(
-        config: CustomConfig(
-          colors: [getWaveColor(), getWaveColor()],
-          durations: [35000, 19440],
-          heightPercentages: [getWaveHeight(), getWaveHeight() - 0.1],
-        ),
-        backgroundColor: Colors.white,
-        size: const Size(double.infinity, double.infinity),
-        waveAmplitude: 0,
-      ),
-    );
   }
 
   @override

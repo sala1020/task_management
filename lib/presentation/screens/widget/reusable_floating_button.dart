@@ -35,11 +35,11 @@ class ReusableFloatingActionButtons extends StatelessWidget {
             ? Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                _buildFAB(
-                  icon: Icons.sync,
-                  onPressed: onSyncPressed,
-                  heroTag: "sync_btn",
-                ),
+                // _buildFAB(
+                //   icon: Icons.sync,
+                //   onPressed: onSyncPressed,
+                //   heroTag: "sync_btn",
+                // ),
                 const SizedBox(width: 16),
                 _buildFAB(
                   icon: Icons.add,
@@ -51,11 +51,11 @@ class ReusableFloatingActionButtons extends StatelessWidget {
             : Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                _buildFAB(
-                  icon: Icons.sync,
-                  onPressed: onSyncPressed,
-                  heroTag: "sync_btn",
-                ),
+                // _buildFAB(
+                //   icon: Icons.sync,
+                //   onPressed: onSyncPressed,
+                //   heroTag: "sync_btn",
+                // ),
                 const SizedBox(height: 12),
                 _buildFAB(
                   icon: Icons.add,

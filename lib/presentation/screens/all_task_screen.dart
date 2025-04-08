@@ -121,6 +121,8 @@ class AllTaskScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Provider.of<AllTaskController>(context);
 
+    final reversedTasks = List.from(controller.tasks.reversed);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -156,7 +158,15 @@ class AllTaskScreen extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: padding, vertical: 12),
             child:
                 controller.tasks.isEmpty
-                    ? const Center(child: Text("No tasks available"))
+                    ? Column(
+                      children: [
+                        TaskSummaryCard(
+                          totalTasks: totalTasks,
+                          completedTasks: completedTasks,
+                          pendingTasks: pendingTasks,
+                        ),
+                      ],
+                    )
                     : Column(
                       children: [
                         TaskSummaryCard(
@@ -176,7 +186,7 @@ class AllTaskScreen extends StatelessWidget {
                                   childAspectRatio: isLarge ? 1.2 : 0.95,
                                 ),
                             itemBuilder: (context, index) {
-                              final task = controller.tasks[index];
+                              final task = reversedTasks[index];
                               final now = DateTime.now();
                               final today = DateTime(
                                 now.year,
