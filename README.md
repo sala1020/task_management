@@ -49,7 +49,7 @@ lib/
 
 ```bash
 # 1. Clone this repository
-git clone https://github.com/yourusername/task-manager.git
+git clone https://github.com/sala1020/task_management.git
 cd task-manager
 
 # 2. Install dependencies
