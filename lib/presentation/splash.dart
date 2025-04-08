@@ -47,21 +47,21 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepPurple.shade50,
+      backgroundColor: Colors.blueGrey.shade50,
       body: Center(
         child: ScaleTransition(
           scale: _animation,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(Icons.task_alt, size: 80, color: Colors.deepPurple),
+              Icon(Icons.task_alt, size: 80, color: Colors.blueGrey),
               const SizedBox(height: 16),
               const Text(
                 "TaskFlow",
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
-                  color: Colors.deepPurple,
+                  color: Colors.blueGrey,
                   letterSpacing: 1.2,
                 ),
               ),
@@ -71,7 +71,7 @@ class _SplashScreenState extends State<SplashScreen>
                 style: TextStyle(color: Colors.black54, fontSize: 14),
               ),
               const SizedBox(height: 24),
-              CircularProgressIndicator(color: Colors.deepPurple),
+              CircularProgressIndicator(color: Colors.blueGrey),
             ],
           ),
         ),
