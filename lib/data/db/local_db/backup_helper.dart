@@ -13,8 +13,8 @@ class DatabaseBackupHelper {
       throw Exception("Storage permission denied");
     }
 
-    final appDir = await getApplicationDocumentsDirectory();
-    final dbPath = p.join(appDir.path, dbName);
+    final appDir = await getDownloadsDirectory();
+    final dbPath = p.join(appDir!.path, dbName);
 
     final downloadsDir = Directory('/storage/emulated/0/Download');
     if (!downloadsDir.existsSync()) {

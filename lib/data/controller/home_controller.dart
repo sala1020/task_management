@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:task_management/core/toast_widget.dart';
 import 'package:task_management/data/db/local_db/backup_helper.dart';
 import 'package:task_management/data/db/local_db/local_db_sqflite.dart';
@@ -69,10 +70,18 @@ class HomeController extends ChangeNotifier {
       }
     }
   }
+  Future<String> getDatabasePath() async {
+  final directory = await getApplicationDocumentsDirectory();
+  return '${directory.path}/your_database_name.db';
+}
+
 
   Future<void> exportToSQLite() async {
     try {
       final tasks = taskBox.getAll();
+
+       final databasePath = await getDatabasePath();
+    print('Database path: $databasePath');
 
       await LocalDBHelper.deleteAllTasks();
       for (final task in tasks) {
@@ -84,6 +93,7 @@ class HomeController extends ChangeNotifier {
       ToastWidget.showToast("${tasks.length} task(s) exported to SQLite ✅");
     } catch (e) {
       ToastWidget.showToast("Export failed ❌: ${e.toString()}");
+      print(e.toString());
     }
   }
 
